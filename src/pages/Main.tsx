@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Main() {
     return (
-        <div className="container mx-auto h-full flex flex-col items-center justify-around">
+        <div className="container mx-auto h-full flex flex-col items-center gap-40">
             <h1 className="text-6xl mt-2 p-5 border-4 border-blue-500">Quiz app</h1>
             <div className="form-panel w-1/3 flex flex-col gap-6 items-center">
                 <input

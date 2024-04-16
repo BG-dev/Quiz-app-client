@@ -1,14 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Questions from '../components/Questions';
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import { moveNextQuestion, movePrevQuestion } from '../redux/questionReducer';
 
 export default function Quiz() {
+    const { queue, trace } = useAppSelector((state) => state.questions);
+    const dispatch = useAppDispatch();
+
     const onNext = () => {
-        console.log('On next click');
+        if (trace < queue.length - 1) dispatch(moveNextQuestion());
     };
 
     const onPrev = () => {
-        console.log('On prev click');
+        if (trace > 0) dispatch(movePrevQuestion());
     };
 
     return (
