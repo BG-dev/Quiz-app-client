@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Question from '../types/Question';
 import { useFetchQuestion } from '../hooks/useFetchQuestion';
 import { useAppSelector } from '../redux/store';
 
-export default function Questions() {
-    const [checked, setChecked] = useState(false);
+interface QuestionsProps {
+    onCheck: (check: number) => void;
+}
+
+export default function Questions({ onCheck }: QuestionsProps) {
     const { loading, apiData, error } = useFetchQuestion();
     const question: Question = useAppSelector(
         (state) => state.questions.queue[state.questions.trace],
     );
 
     const onSelect = (index: number) => {
-        setChecked(true);
-        console.log('Selected radio button changed');
+        onCheck(index);
     };
 
     if (loading) return <h2 className="text-3xl text-blue-500">Loading...</h2>;
@@ -27,7 +29,7 @@ export default function Questions() {
                         <input
                             className="hidden peer"
                             type="radio"
-                            checked={checked}
+                            checked={false}
                             name="options"
                             id={`q${index}-option`}
                             onChange={() => onSelect(index)}
